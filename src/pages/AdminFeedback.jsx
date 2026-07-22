@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import api from "../api";
 
 export default function AdminFeedback() {
@@ -6,9 +6,8 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-  // Define it inside so the linter can inspect the await path
-  const fetchFeedback = async () => {
+  // 2. Wrap fetchFeedback in useCallback so it's accessible everywhere
+  const fetchFeedback = useCallback(async () => {
     try {
       const res = await api.get("/feedback");
       setFeedbackList(res.data || []);
@@ -17,17 +16,19 @@ export default function AdminFeedback() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []); // Empty array means this function reference never changes unnecessarily
 
-  fetchFeedback();
-}, []); // Empty array ensures it only fires once on mount
+  // 3. Run it on mount safely by passing it to the dependency array
+  useEffect(() => {
+    fetchFeedback();
+  }, [fetchFeedback]); 
 
-
+  // 4. This can now safely call fetchFeedback() without scope errors
   const updateStatus = async (id, status) => {
     try {
       await api.put(`/feedback/${id}`, { status });
       setMessage("Feedback status updated");
-      fetchFeedback();
+      fetchFeedback(); // Works perfectly now!
     } catch (error) {
       setMessage(error.response?.data?.error || "Failed to update feedback");
     }

@@ -44,7 +44,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
       {user?.role === "admin" && (
         <div className="col-12">
           <div className="card shadow-sm">
@@ -60,6 +59,20 @@ export default function Dashboard() {
           </div>
         </div>
       )}
+      <div className="col-md-6">
+        <div className="card shadow-sm h-100">
+          <div className="card-body">
+            <h5>Share Your Experience</h5>
+            <p className="text-muted">
+              Submit ratings and reviews for the restaurant.
+            </p>
+            <Link to="/feedback" className="btn btn-outline-success">
+              Go to Feedback
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
+    
   );
 }

@@ -44,8 +44,9 @@ export default function Login() {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        <div className="card shadow-lg border-0" style={{ width: "100%", maxWidth: "420px" }}>
+    <div className="auth-hero">
+      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="card shadow-lg border-0" style={{ width: "100%", maxWidth: "420px", background: 'rgba(255,255,255,0.92)' }}>
             <div className="card-body p-4">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
@@ -82,6 +83,5 @@ export default function Login() {
             </div>
         </div>
     </div>
-    
-  );
-}
+  </div>
+);}

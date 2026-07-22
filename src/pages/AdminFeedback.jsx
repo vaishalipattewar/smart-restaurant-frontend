@@ -6,8 +6,9 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+  // Define it inside so the linter can inspect the await path
   const fetchFeedback = async () => {
-    await Promise.resolve();
     try {
       const res = await api.get("/feedback");
       setFeedbackList(res.data || []);
@@ -18,9 +19,9 @@ export default function AdminFeedback() {
     }
   };
 
-  useEffect(() => {
-    fetchFeedback();
-  }, []);
+  fetchFeedback();
+}, []); // Empty array ensures it only fires once on mount
+
 
   const updateStatus = async (id, status) => {
     try {

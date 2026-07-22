@@ -18,6 +18,7 @@ export default function AdminMenu() {
   const [message, setMessage] = useState("");
 
   const fetchItems = async () => {
+    await Promise.resolve();
     try {
       const res = await api.get("/menu");
       setItems(res.data || []);

@@ -29,20 +29,21 @@ export default function Menu() {
 
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
   const fetchMenu = async () => {
+    await Promise.resolve();
     try {
       const res = await api.get("/menu");
       setItems(res.data || []);
-    } catch (err) {
+    } catch {
       setError("Unable to load menu items right now.");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchMenu();
+  }, []);
 
   const categories = useMemo(() => {
     const unique = [...new Set(items.map((item) => item.category).filter(Boolean))];

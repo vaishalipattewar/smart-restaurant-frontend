@@ -20,8 +20,9 @@ export default function Feedback() {
   });
 
   const fetchFeedback = async () => {
+    await Promise.resolve();
+    setLoading(true);
     try {
-      setLoading(true);
       const response = await api.get("/feedback");
       setFeedbackList(response.data);
     } catch (error) {

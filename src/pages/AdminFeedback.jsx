@@ -7,6 +7,7 @@ export default function AdminFeedback() {
   const [message, setMessage] = useState("");
 
   const fetchFeedback = async () => {
+    await Promise.resolve();
     try {
       const res = await api.get("/feedback");
       setFeedbackList(res.data || []);

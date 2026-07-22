@@ -18,6 +18,7 @@ export default function ReserveTable() {
   const [message, setMessage] = useState({ type: "", text: "" });
 
   const fetchReservations = async () => {
+    await Promise.resolve();
     if (!user) {
       setReservations([]);
       setLoading(false);

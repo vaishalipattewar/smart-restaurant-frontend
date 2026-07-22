@@ -7,6 +7,7 @@ export default function AdminUsers() {
   const [message, setMessage] = useState("");
 
   const fetchUsers = async () => {
+    await Promise.resolve();
     try {
       const res = await api.get("/users");
       setUsers(res.data || []);

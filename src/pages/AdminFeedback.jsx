@@ -6,7 +6,6 @@ export default function AdminFeedback() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  // 1. Memoize fetchFeedback so its reference stays stable
   const fetchFeedback = useCallback(async () => {
     try {
       const res = await api.get("/feedback");
@@ -18,7 +17,6 @@ export default function AdminFeedback() {
     }
   }, []);
 
-  // 2. Run it on mount inside a setTimeout to satisfy the strict linter rule
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchFeedback();

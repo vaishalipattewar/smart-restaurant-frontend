@@ -36,8 +36,12 @@ export default function ReserveTable() {
   };
 
   useEffect(() => {
-    fetchReservations();
-  }, [user]);
+    const timer = setTimeout(() => {
+      fetchReservations();
+    }, 0);
+
+    return () => clearTimeout(timer); 
+  }, [fetchReservations]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

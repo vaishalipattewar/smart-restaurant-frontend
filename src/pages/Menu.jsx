@@ -42,8 +42,12 @@ export default function Menu() {
   };
 
   useEffect(() => {
-    fetchMenu();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchMenu();
+    }, 0);
+
+    return () => clearTimeout(timer); 
+  }, [fetchMenu]);
 
   const categories = useMemo(() => {
     const unique = [...new Set(items.map((item) => item.category).filter(Boolean))];

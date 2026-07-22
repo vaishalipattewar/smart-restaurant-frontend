@@ -30,8 +30,12 @@ export default function AdminMenu() {
   };
 
   useEffect(() => {
-    fetchItems();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchItems();
+    }, 0);
+
+    return () => clearTimeout(timer); 
+  }, [fetchItems]);
 
   const resetForm = () => {
     setForm(emptyForm);

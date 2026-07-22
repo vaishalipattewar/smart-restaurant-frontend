@@ -33,10 +33,18 @@ export default function Feedback() {
   };
 
   useEffect(() => {
+    let timer;
+
     if (user) {
-      fetchFeedback();
+      timer = setTimeout(() => {
+        fetchFeedback();
+      }, 0);
     }
-  }, [user]);
+    return () => {
+      if (timer) clearTimeout(timer);
+      };
+  }, [user, fetchFeedback]); 
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
